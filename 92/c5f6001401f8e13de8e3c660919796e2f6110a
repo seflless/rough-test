@@ -1,0 +1,31 @@
+src/main.ts
+  d319693e644d2982 20-21,31-128,130-198,200-201
+  h_04c23196cc4789 16,18-19,22,129,199
+src/style.css
+  h_04c23196cc4789 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "92c5f6001401f8e13de8e3c660919796e2f6110a",
+  "prompts": {
+    "d319693e644d2982": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c43aa95d-f21c-461a-aba2-523fcc72551b",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Francois Laberge",
+      "messages": [],
+      "total_additions": 259,
+      "total_deletions": 95,
+      "accepted_lines": 171,
+      "overriden_lines": 2
+    }
+  },
+  "humans": {
+    "h_04c23196cc4789": {
+      "author": "Francois Laberge"
+    }
+  }
+}
