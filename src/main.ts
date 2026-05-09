@@ -1,40 +1,63 @@
+import type { Point } from "roughjs/bin/geometry";
 import "./style.css";
 import rough from "roughjs";
 
+const initialSpeed = 2400;
+
 const svg = document.querySelector("svg");
 const rc = rough.svg(svg);
-const polygon = rc.polygon(
-  [
-    [10, 10],
-    [200, 10],
-    [100, 100],
-    [100, 50],
-    [300, 100],
-    [60, 200],
-  ],
-  {
-    stroke: "none", // <-- no outline
-    fill: "red",
-    // hachureAngle: -45, // angle of hachure,
-    hachureGap: 8,
-    roughness: 1,
-    fillStyle: "zigzag",
-    strokeWidth: 6,
-    // fillStyle: "solid",
-    // stroke: "black",
-    // strokeWidth: 2,
-    // fill: "red",
-    // hachureAngle: 90,
-  },
-);
-svg.appendChild(polygon);
+const vertices: Point[] = [
+  [10, 10],
+  [200, 10],
+  // [100, 100],
+  // [100, 50],
+  [300, 100],
+  [60, 200],
+];
+
+const outline = rc.polygon(vertices, {
+  // stroke: "none", // <-- no outline
+  // fill: "blue",
+  // fill: "red",
+  fill: "none",
+  // hachureAngle: -45, // angle of hachure,
+  hachureGap: 12,
+  roughness: 1,
+  fillStyle: "zigzag",
+  strokeWidth: 2,
+  stroke: "rgba(0,0,0,0.8)",
+  // fillStyle: "solid",
+  // stroke: "black",
+  // strokeWidth: 2,
+  // fill: "red",
+  // hachureAngle: 90,
+});
+svg.appendChild(outline);
+
+const fillPolygon = rc.polygon(vertices, {
+  stroke: "none", // <-- no outline
+  // fill: "blue",
+  // fill: "red",
+  fill: "rgba(64,64,255,0.98)",
+  // hachureAngle: -45, // angle of hachure,
+  hachureGap: 8,
+  roughness: 1,
+  fillStyle: "zigzag",
+  strokeWidth: 12,
+  // fillStyle: "solid",
+  // stroke: "black",
+  // strokeWidth: 2,
+  // fill: "red",
+  // hachureAngle: 90,
+});
+svg.appendChild(fillPolygon);
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 // Split each rough.js <path> into one <path> per subpath (each `M ...` block).
 // This way each row of the zigzag fill becomes its own continuous stroke we can
 // animate cleanly with stroke-dashoffset.
-polygon.querySelectorAll<SVGPathElement>("path").forEach((original) => {
+fillPolygon.querySelectorAll<SVGPathElement>("path").forEach((original) => {
   const d = original.getAttribute("d") ?? "";
   // Match each subpath starting with M/m and going up to (but not including) the next M/m.
   const subpaths = d.match(/[Mm][^Mm]*/g) ?? [];
@@ -58,7 +81,7 @@ polygon.querySelectorAll<SVGPathElement>("path").forEach((original) => {
   parent.removeChild(original);
 });
 
-const paths = polygon.querySelectorAll<SVGPathElement>("path");
+const paths = fillPolygon.querySelectorAll<SVGPathElement>("path");
 
 const debug = document.createElement("pre");
 debug.style.cssText =
@@ -126,7 +149,7 @@ const speedInput = document.createElement("input");
 speedInput.type = "number";
 speedInput.min = "1";
 speedInput.step = "10";
-speedInput.value = "1600";
+speedInput.value = initialSpeed.toString();
 speedInput.style.cssText =
   "width:80px;padding:4px 6px;background:#222;color:#fff;border:1px solid #444;border-radius:4px;font:13px system-ui;";
 
