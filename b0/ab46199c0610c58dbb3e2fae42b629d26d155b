@@ -1,0 +1,18 @@
+src/main.ts
+  h_0dbcbba47c7061 1,9,16-19,22,27-28,35-53,60,84
+  h_04c23196cc4789 5-6,12-13,20-21,24,152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "b0ab46199c0610c58dbb3e2fae42b629d26d155b",
+  "prompts": {},
+  "humans": {
+    "h_04c23196cc4789": {
+      "author": "Francois Laberge"
+    },
+    "h_0dbcbba47c7061": {
+      "author": "Francois Laberge <francoislaberge@gmail.com>"
+    }
+  }
+}
